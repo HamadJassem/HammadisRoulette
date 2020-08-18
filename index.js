@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client();
-const token = process.env.BOT_TOKEN;
 let gameOn = false; //determines if the game is on or not
 let players = []; // stores the users' ID
 let ammo = [0,0,1,0,0,0]; //the bullets in the gun
@@ -164,4 +163,4 @@ bot.on('message', msg => {
   }
 })
 
-bot.login(token); //secret_key
+bot.login(process.env.BOT_TOKEN); //secret_key
