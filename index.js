@@ -114,7 +114,7 @@ function stopGame(msg) {
 }
 
 bot.on('message', msg => {
-  if (msg.channel.id === '744595289209307307') {
+  if (msg.channel.id === process.env.CHANNELID) {
     if(msg.content === "!add"){ //command for !add
       if (players.includes(msg.author.id)) {
         msg.reply("You already exist in the queue");
