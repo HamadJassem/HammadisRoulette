@@ -92,6 +92,7 @@ function shootPlayer(msg){
   }
   if(players.length == 1){
     let member = msg.guild.members.cache.get(players[0]);
+    console.log(member);
     msg.channel.send(member.displayName + " Is The Russian Roulette Champion");
     stopGame(msg);
   }
