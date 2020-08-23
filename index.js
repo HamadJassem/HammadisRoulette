@@ -62,9 +62,8 @@ function CallPlayer(players,msg){
   } else {
     circle = 0;
   }
-  bot.users.fetch(players[circle]).then(value => {
-    msg.channel.send(value.username + " it is your turn to shoot!");
-  });
+  let member = msg.guild.members.cache.get(players[circle]);
+  msg.channel.send(member.displayName + " it is your turn to shoot!");
 }
 
 function shootPlayer(msg){
@@ -92,9 +91,8 @@ function shootPlayer(msg){
     }
   }
   if(players.length == 1){
-    bot.users.fetch(players[0]).then(value => {
-      msg.channel.send(value.username + " is the russian roulette champion");
-    });
+    let member = msg.guild.members.cache.get(players[circle]);
+    msg.channel.send(member.displayName + " Is The Russian Roulette Champion");
     stopGame(msg);
   }
   CallPlayer(players,msg);
@@ -115,7 +113,7 @@ function stopGame(msg) {
 
 bot.on('message', msg => {
   if (msg.channel.id === process.env.CHANNELID) { //replace process.env.channelid by your active channel
-    if(msg.content === "!add"){ //command for !add
+    if(msg.content.toLowerCase() === "!add"){ //command for !add
       if (players.includes(msg.author.id)) {
         msg.reply("You already exist in the queue");
       }
@@ -125,7 +123,7 @@ bot.on('message', msg => {
     }
 
     }
-    else if (msg.content === "!play") { //command for !play
+    else if (msg.content.toLowerCase() === "!play") { //command for !play
       if (gameOn == true) {
         msg.reply("Game is already On");
       }
@@ -142,11 +140,11 @@ bot.on('message', msg => {
       }
     }
 
-    else if (msg.content === "!stop") { //stops the game
+    else if (msg.content.toLowerCase() === "!stop") { //stops the game
       stopGame(msg);
     }
 
-    else if(msg.content === "!shoot"){
+    else if(msg.content.toLowerCase() === "!shoot"){
       if (gameOn == false) {
         msg.reply("game is not active");
       }
